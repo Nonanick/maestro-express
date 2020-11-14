@@ -110,7 +110,7 @@ export class Adapter extends EventEmitter implements IAdapter {
 	 * ---------------
 	 * Responsible for orchestrating the flow of a request
 	 * Steps taken by the default flow:
-	 * 1. Trasnform Request
+	 * 1. Transform Request
 	 * 2. Call the API Request Handler set in the adapter (Usually an APIMaestro handle function)
 	 * > 2.1 The API Handler has access to a normalized function to either send the IApiRouteResponse
 	 * > or an error
@@ -125,6 +125,7 @@ export class Adapter extends EventEmitter implements IAdapter {
 		route: IProxiedRoute,
 		method: HTTPMethod,
 		request: Request,
+		matchedPattern: string,
 		response: Response,
 		next: NextFunction
 	) => {
@@ -142,7 +143,7 @@ export class Adapter extends EventEmitter implements IAdapter {
 		}
 
 		// Create API Request
-		let apiRequest = this._transformRequest(request);
+		let apiRequest = this._transformRequest(request, matchedPattern);
 		apiRequest.method = method;
 
 		// Send it to API Handler
@@ -337,67 +338,67 @@ export class Adapter extends EventEmitter implements IAdapter {
 		switch (method) {
 			case 'all':
 				this.express.all(url, (req, res, next) => {
-					this._requestHandler(route, method, req, res, next);
+					this._requestHandler(route, method, req, url, res, next);
 				});
 				this.emit(Events.ALL_REQUEST, route);
 				break;
 			case 'get':
 				this.express.get(url, (req, res, next) => {
-					this._requestHandler(route, method, req, res, next);
+					this._requestHandler(route, method, req, url, res, next);
 				});
 				this.emit(Events.GET_REQUEST, route);
 				break;
 			case 'search':
 				this.express.search(url, (req, res, next) => {
-					this._requestHandler(route, method, req, res, next);
+					this._requestHandler(route, method, req, url, res, next);
 				});
 				this.emit(Events.GET_REQUEST, route);
 				break;
 			case 'post':
 				this.express.post(url, (req, res, next) => {
-					this._requestHandler(route, method, req, res, next);
+					this._requestHandler(route, method, req, url, res, next);
 				});
 				this.emit(Events.POST_REQUEST, route);
 				break;
 			case 'put':
 				this.express.put(url, (req, res, next) => {
-					this._requestHandler(route, method, req, res, next);
+					this._requestHandler(route, method, req, url, res, next);
 				});
 				this.emit(Events.PUT_REQUEST, route);
 				break;
 			case 'patch':
 				this.express.patch(url, (req, res, next) => {
-					this._requestHandler(route, method, req, res, next);
+					this._requestHandler(route, method, req, url, res, next);
 				});
 				this.emit(Events.PATCH_REQUEST, route);
 				break;
 			case 'delete':
 				this.express.delete(url, (req, res, next) => {
-					this._requestHandler(route, method, req, res, next);
+					this._requestHandler(route, method, req, url, res, next);
 				});
 				this.emit(Events.DELETE_REQUEST, route);
 				break;
 			case 'head':
 				this.express.head(url, (req, res, next) => {
-					this._requestHandler(route, method, req, res, next);
+					this._requestHandler(route, method, req, url, res, next);
 				});
 				this.emit(Events.HEAD_REQUEST, route);
 				break;
 			case 'options':
 				this.express.options(url, (req, res, next) => {
-					this._requestHandler(route, method, req, res, next);
+					this._requestHandler(route, method, req, url, res, next);
 				});
 				this.emit(Events.OPTIONS_REQUEST, route);
 				break;
 			case 'connect':
 				this.express.connect(url, (req, res, next) => {
-					this._requestHandler(route, method, req, res, next);
+					this._requestHandler(route, method, req, url, res, next);
 				});
 				this.emit(Events.CONNECT_REQUEST, route);
 				break;
 			case 'trace':
 				this.express.trace(url, (req, res, next) => {
-					this._requestHandler(route, method, req, res, next);
+					this._requestHandler(route, method, req, url, res, next);
 				});
 				this.emit(Events.TRACE_REQUEST, route);
 				break;

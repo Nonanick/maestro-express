@@ -2,9 +2,13 @@ import { IRouteRequest, RouteRequest } from 'maestro';
 import { Request } from 'express';
 import { Adapter } from '../Adapter';
 
-export function TransformRequest(request: Request): IRouteRequest {
+export function TransformRequest(request: Request, matchedPattern: string): IRouteRequest {
 
-  let req: IRouteRequest = new RouteRequest(Adapter.ADAPTER_NAME, request.originalUrl);
+  let req: IRouteRequest = new RouteRequest(
+    Adapter.ADAPTER_NAME,
+    request.originalUrl,
+    matchedPattern
+  );
 
   //  Request Identification in Express is List of IP's + User Agent
   let requestIdentification = request.ips.join(' - ')
