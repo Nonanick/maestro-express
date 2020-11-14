@@ -1,4 +1,4 @@
-import { ApiError, ApiException } from 'auria-maestro';
+import { ApiError, ApiException } from 'maestro';
 import { Response, NextFunction } from 'express';
 
 export function ErrorHandler(response: Response, next: NextFunction, error: ApiError | ApiException | Error) {

@@ -1,7 +1,7 @@
 import { Response } from 'express';
 import { Commands } from '../commands/Commands';
 import { Adapter } from '../Adapter';
-import { IApiRouteResponse, ICommand } from 'auria-maestro';
+import { IApiRouteResponse, ICommand } from 'maestro';
 
 export function SendResponse(routeResp: IApiRouteResponse, response: Response) {
 	let send = routeResp.payload;

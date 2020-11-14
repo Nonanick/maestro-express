@@ -3,7 +3,7 @@ import cookieParser from 'cookie-parser';
 import { EventEmitter } from 'events';
 import express, { Application, CookieOptions, NextFunction, Request, Response } from 'express';
 import { Server } from 'http';
-import { Container, HTTPMethod, IAdapter, ICommand, IContainer, IProxiedRoute, Maestro, RequestFlowNotDefined } from 'auria-maestro';
+import { Container, HTTPMethod, IAdapter, ICommand, IContainer, IProxiedRoute, Maestro, RequestFlowNotDefined } from 'maestro';
 import { ErrorHandler } from './errorHandler/ErrorHandler';
 import { Events } from './events/Events';
 import { SendResponse } from './sendResponse/SendResponse';

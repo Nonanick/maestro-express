@@ -1,4 +1,4 @@
-import { IRouteRequest, RouteRequest } from 'auria-maestro';
+import { IRouteRequest, RouteRequest } from 'maestro';
 import { Request } from 'express';
 import { Adapter } from '../Adapter';
 
