@@ -41,5 +41,7 @@ export function TransformRequest(request: Request, matchedPattern: string): IRou
     req.add(urlName, request.params[urlName], 'url');
   }
 
+  req.setAsRaw();
+  
   return req;
 }
